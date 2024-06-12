@@ -9,7 +9,7 @@ class Player:
     __id = next(index)
     __health = 100
     __xp = 0
-    __gold = 1000
+    __gold = 50
     __weapon = []
 
 
@@ -34,15 +34,18 @@ class Player:
     def get_xp(self):
         return self.__xp
     
+    def set_xp(self, new_xp):
+        self.__xp = new_xp
+    
     def get_health(self):
         return self.__health
     
 
-    def set_health(self, healt):
-        self.__health -= healt
+    def set_health(self, healt:int):
+        self.__health = healt
 
     def set_gold(self, gold):
-        self.__gold -= gold
+        self.__gold = gold
     
     def get_defeated_monsters(self):
         return self.__defeat_monsters

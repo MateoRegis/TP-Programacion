@@ -5,10 +5,10 @@ from store import Store
 from player import Player
 
 #Vamos a crear las armas
-stick = Weapon("Stick", 5, 20)
-dagger = Weapon("Dagger", 30, 30)
-claw_hammer = Weapon("Claw Hammer", 50, 40)
-sword = Weapon("Sword", 100, 50)
+stick = Weapon("Stick", 7, 20)
+dagger = Weapon("Dagger", 18, 30)
+claw_hammer = Weapon("Claw Hammer", 33, 40)
+sword = Weapon("Sword", 50, 50)
 
 
 #vamos a crear una lista de armas
@@ -23,7 +23,7 @@ weapons.append(sword)
 
 #ahora vamos a crear los monstruos
 
-slime = Monster("Slime", 2, 15)
+slime = Monster("Slime", 3, 15)
 fanged_beast = Monster("Fanged Beast", 8, 60)
 dragon = Monster("Dragon", 20, 300)
 

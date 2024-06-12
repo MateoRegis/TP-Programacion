@@ -15,7 +15,11 @@ class Cave(Location):
         if self.attack(player, monster, weapon):
             print("Venciste al monstruo. Felicitaciones!!!")
             player.add_defeated_monster(monster)
-            print("Se agrego el montruo a lalista de monstruos vencidos.")
+            print("Se agrego el montruo a la lista de monstruos vencidos.")
+            self.defeat_monster(player, monster)
+        else:
+            print(":( Perdiste!!!")
+
 
     def Exit(self):
         super().Exit()
@@ -34,7 +38,8 @@ class Cave(Location):
         banTerminar = False
         gano = False
         while True:
-            player.set_health(monster.getMonsterAttackValue(player.get_xp()))
+            health = player.get_health() - monster.getMonsterAttackValue(player.get_xp())
+            player.set_health(health)
             if self.isMonsterHit(player):
                 monster.set_health(weapon.get_power() + math.floor(random.random() * player.get_xp() + 1))
             else:
@@ -42,11 +47,10 @@ class Cave(Location):
             
             
             if (player.get_health() <= 0):
-                print("Perdiste.")
+                player.set_health(0)
                 banTerminar = True
                 
             elif (monster.get_health() <= 0):
-                print("Ganaste")
                 banTerminar = True
                 gano = True
                 
@@ -62,3 +66,11 @@ class Cave(Location):
         return gano
    
    
+    def defeat_monster(self, player:Player, monster:Monster):
+        gold = math.floor(monster.get_level() * 6.7)
+        gold += player.get_gold()
+        player.set_gold(gold)
+        xp = monster.get_level()
+        xp += player.get_xp()
+        player.set_xp(xp)
+

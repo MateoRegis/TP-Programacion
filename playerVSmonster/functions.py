@@ -8,7 +8,7 @@ def go_cave():
     for monster in monsters:
         print(f"{index + 1}-{monster}")
         index += 1
-    index_monster = int(input("Seleccione un monstruo: "))
+    index_monster = int(input("Seleccione un monstruo o 0 para salir: "))
     #en index monster nos guardamos la opcion que selecciona el jugador, esta opcion si le restamos 1 es el indice del monstruo
     
 
@@ -41,6 +41,7 @@ def go_cave():
             index_weapon = int(input("Seleccione un arma para luchar: "))
             weapon = player1.get_selected_weapon(index_weapon - 1)
             cave.Fight(player1, monster_selected, weapon)
+            
         else:
             #si no esta, entonces no lo dejamos seleccionar el monstruo que habia seleccionado
             print("No puedes seleccionar este monstruo, primero debes vencer al anterior.")
@@ -59,20 +60,66 @@ def go_cave():
             cave.Fight(player1, monster_selected, weapon)
         else:
             print("No puedes seleccionar este monstruo, primero debes vencer al anterior.")
+    elif index_monster == 0:
+        menu()
     else:
         print("Opción incorrecta.")
 
 
 
 def buy_health():
-    pass
+    print("\nCada 10% de salud que quiera comprar cuesta 10 monedas de oro\n")
+    while True:
+        option = int(input("Seleccione 1 si quiere comprar, o 0 para cancelar: "))
+        if option == 1:
+            store.BuyHealth(player1)
+        elif option == 0:
+            break
+        else:
+            print("Opción incorrecta.\n")
 
 def sell_weapon():
-    pass
+    print("\nArmas disponibles del jugador: ")
+    index = 0
+    if len(player1.GetWeapon()) > 1 and weapons[0] in player1.GetWeapon():
+        for weapon in player1.GetWeapon():
+            print(f"{index + 1}-{weapon}")
+            index += 1
+
+        index_weapon = int(input("Seleccione el arma que quiere vender: "))
+        weapon_selected = player1.get_selected_weapon(index_weapon - 1)
+        store.SellWeapon(player1, weapon_selected)
+    else:
+        print("No puedes vender tu arma.\n")
 
 def buy_weapon():
-    weapon = show_weapons()
-    store.BuyWeapon(player1, weapon)
+    index_weapon = show_weapons() - 1
+    if index_weapon == 0:
+        #Si el indice es 0, significa que eligio la stick, entonces lo dejamos comprar si no la tiene
+        weapon_selected = weapons[index_weapon]
+        store.BuyWeapon(player1, weapon_selected)
+    elif index_weapon == 1:
+        #si el indice es 1, significa que eligio la dagger, entonces tenemos que verificar si tiene la stick
+        if weapons[0] in player1.GetWeapon():
+            weapon_selected = weapons[index_weapon]
+            store.BuyWeapon(player1, weapon_selected)
+        else:
+            print("No puede comprar esta arma, primero debe comprar el arma anterior.")
+    elif index_weapon == 2:
+        if weapons[1] in player1.GetWeapon():
+            weapon_selected = weapons[index_weapon]
+            store.BuyWeapon(player1, weapon_selected)
+        else:
+            print("No puede comprar esta arma, primero debe comprar el arma anterior.")
+    elif index_weapon == 3:
+        if weapons[2] in player1.GetWeapon():
+            weapon_selected = weapons[index_weapon]
+            store.BuyWeapon(player1, weapon_selected)
+        else:
+            print("No puede comprar esta arma, primero debe comprar el arma anterior.")
+    else:
+        print("Opción incorrecta.")
+            
 
 def show_weapons():
     print("\nArmas disponibles: ")
@@ -82,8 +129,11 @@ def show_weapons():
         index += 1
 
     index_weapon = int(input("Seleccione un arma: "))
-    weapon_selected = weapons[index_weapon - 1]
-    return weapon_selected
+    
+    return index_weapon
+
+def show_player():
+    print(player1)
 
 def menu_store():
     print(store)
@@ -113,7 +163,8 @@ def menu():
         print("\n----------------------Menú----------------------\n")
         print("1.Ir a la tienda")
         print("2.Ir a la arena")
-        print("3.Salir\n")
+        print("3.Ver datos del jugador")
+        print("4.Salir\n")
         option = int(input("Elija una opción: "))
 
         if option == 1:
@@ -121,6 +172,8 @@ def menu():
         elif option == 2:
             go_cave()
         elif option == 3:
+            show_player()
+        elif option == 4:
             print("Saliendo del juego...")
             break
         else:

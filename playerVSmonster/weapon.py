@@ -14,5 +14,5 @@ class Weapon:
         return self.__power
     
     def __str__(self):
-        return f"{self.__name}\nPoder: {self.__power}\n"
+        return f"{self.__name}\nPoder: {self.__power}\nPrecio: {self.__price}\n"
 
