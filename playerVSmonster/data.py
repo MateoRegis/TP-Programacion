@@ -2,13 +2,12 @@ from weapon import Weapon
 from monster import Monster
 from cave import Cave
 from store import Store
-from player import Player
 
 #Vamos a crear las armas
-stick = Weapon("Stick", 7, 20)
-dagger = Weapon("Dagger", 18, 30)
-claw_hammer = Weapon("Claw Hammer", 33, 40)
-sword = Weapon("Sword", 50, 50)
+stick = Weapon("Stick", 5, 10)
+dagger = Weapon("Dagger", 30, 30)
+claw_hammer = Weapon("Claw Hammer", 50, 50)
+sword = Weapon("Sword", 100, 60)
 
 
 #vamos a crear una lista de armas
@@ -22,14 +21,13 @@ weapons.append(sword)
 
 
 #ahora vamos a crear los monstruos
-
-slime = Monster("Slime", 3, 15)
+slime = Monster("Slime", 2, 15)
 fanged_beast = Monster("Fanged Beast", 8, 60)
 dragon = Monster("Dragon", 20, 300)
 
-#ahora vamos a crear una lista de monstruos
-
+#creamos una lista de monstruos vacia, en esta lista vamos a añadir los monstruos
 monsters = []
+
 #en ea lista vamos a ñadir los lomnstruos que creamos
 monsters.append(slime)
 monsters.append(fanged_beast)
@@ -44,6 +42,5 @@ store = Store("Store", "Bienvenido a la tienda.")
 cave = Cave("Cave", "Entraste a la arena. Ves algunos monstruos.")
 
 
-#ahor avamos a crear un jugador para poder realizar pruebas
-player1 = Player("Juancito", stick)
+
 

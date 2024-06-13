@@ -21,7 +21,7 @@ class Monster:
         return self.__health
     
     def set_health(self, health):
-        self.__health -= health
+        self.__health = health
 
     def get_level(self)->int:
         return self.__level

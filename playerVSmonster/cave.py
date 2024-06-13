@@ -11,18 +11,16 @@ class Cave(Location):
         super().__init__(name, message)
 
     def Fight(self, player:Player, monster:Monster, weapon:Weapon):
-        print(f"Peleando con el monstruo {monster}")
+        print(f"\nPeleando con el monstruo...\n\n{monster}")
         if self.attack(player, monster, weapon):
-            print("Venciste al monstruo. Felicitaciones!!!")
+            print("\nVenciste al monstruo. Felicitaciones!!!")
             player.add_defeated_monster(monster)
-            print("Se agrego el montruo a la lista de monstruos vencidos.")
             self.defeat_monster(player, monster)
+            return True
         else:
             print(":( Perdiste!!!")
+            return False
 
-
-    def Exit(self):
-        super().Exit()
 
     def __str__(self):
         return f"{self._message}"
@@ -41,9 +39,10 @@ class Cave(Location):
             health = player.get_health() - monster.getMonsterAttackValue(player.get_xp())
             player.set_health(health)
             if self.isMonsterHit(player):
-                monster.set_health(weapon.get_power() + math.floor(random.random() * player.get_xp() + 1))
+                health = monster.get_health() - (weapon.get_power() + math.floor(random.random() * player.get_xp() + 1))
+                monster.set_health(health)
             else:
-                print("Erraste.")
+                print("\nErraste.")
             
             
             if (player.get_health() <= 0):
@@ -56,7 +55,7 @@ class Cave(Location):
                 
             
             if random.random() <= 0.1 and len(player.GetWeapon()) != 1 :
-                print("Tu arma se rompió")
+                print("\nTu arma se rompió")
                 player.remove_weapon(weapon)
 
             if banTerminar == True:

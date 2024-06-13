@@ -1,6 +1,7 @@
-from data import *
+from functions import loguin
+
+#este es el main
 
 
-print(player1)
-for weapon in player1.GetWeapon():
-    print(weapon)
+
+loguin()

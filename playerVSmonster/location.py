@@ -9,6 +9,4 @@ class Location(ABC):
         self._name = name
         self._message = message
 
-    @abstractmethod
-    def Exit(self):
-        print("Exiting...")
+    
