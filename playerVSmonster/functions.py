@@ -36,6 +36,7 @@ def go_cave(player: Player):
         initialize_monsters()
         print("\n-------------------Arena-------------------\n")
         print(f"{cave}\n")
+        print(f'Salud: {player.get_health()}\n')
 
         #le mostramos los monstruos disponibles para luchar, enumerate nos permite obtener tanto el indice como el monstruo
         for index, monster in enumerate(monsters, start=1):
@@ -220,8 +221,8 @@ def buy_weapon(player:Player):
     elif index_weapon == 2:
         #si el indice es 2, significa que eligio la claw hammer, entonces tenemos que verificar si tiene la dagger
         if validate_weapon(weapons[1], player):
-             weapon_selected = weapons[index_weapon]
-             store.BuyWeapon(player, weapon_selected)
+            weapon_selected = weapons[index_weapon]
+            store.BuyWeapon(player, weapon_selected)
     elif index_weapon == 3:
         #si el indice es 3, significa que eligio la sword, entonces tenemos que verificar si tiene la claw hammer
         if validate_weapon(weapons[2], player):
@@ -381,6 +382,7 @@ def menu_store(player:Player):
     while True:
                 print("\n-------------------------Tienda-------------------------\n")
                 print(f"{store}\n")
+                print(f'Oro Disponible: {player.get_gold()}\n')
                 print("1.Comprar arma\n")
                 print("2.Vender arma\n")
                 print("3.Comprar salud\n")
@@ -485,23 +487,24 @@ def menu(player:Player):
         print("3.Ver datos del jugador\n")
         print("4.Empezar de nuevo\n")
         print("5.Salir\n")
-        option = int(input("Elija una opción: "))
-
-        if option == 1:
-            menu_store(player)
-        elif option == 2:
-            go_cave(player)
-        elif option == 3:
-            show_player(player)
-        elif option == 4:
-            #otra forma de hacer esto es simplemente llamar al loguin, la diferencia es que el jugador actual no se elimina, sigue existiendo
-            restart(player)
-        elif option == 5:
-            print("\nSaliendo del juego...")
-            exit()
-        else:
-            print("\nOpción incorrecta.")
-
+        try:
+            option = int(input("Elija una opción: "))
+        
+            if option == 1:
+                menu_store(player)
+            elif option == 2:
+                go_cave(player)
+            elif option == 3:
+                show_player(player)
+            elif option == 4:
+                #otra forma de hacer esto es simplemente llamar al loguin, la diferencia es que el jugador actual no se elimina, sigue existiendo
+                restart(player)
+            elif option == 5:
+                print("\nSaliendo del juego...")
+                exit()
+            else:
+                print("\nOpción incorrecta.")
+        except ValueError: print("\nOpción incorrecta")
 
 ################################################################################################################################################################################################################
 
